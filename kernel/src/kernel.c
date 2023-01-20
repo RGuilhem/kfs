@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:09:49 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 13:28:24 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/20 13:49:49 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	kernel_main(void)
 {
-	terminal_initialize();
-	terminal_putstr("Hello \nWorld!");
+	vga_initialize();
+	vga_putstr("Hello World!");
 }
