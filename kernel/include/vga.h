@@ -6,14 +6,14 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:40:24 by graux             #+#    #+#             */
-/*   Updated: 2023/01/19 23:38:05 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/20 11:46:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VGA_H
 # define VGA_H
 
-# include <stdint.h>
+# include "kernel.h"
 
 /* Hardware text mode colors*/
 enum vga_color {
