@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:46:57 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 14:25:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/20 15:43:14 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ size_t		vga_row;
 size_t		vga_col;
 uint8_t		vga_color;
 uint16_t	*vga_buffer;
+
+static void	vga_update_cursor()
+{
+	vga_move_cursor(vga_col, vga_row);
+}
 
 void	vga_initialize(void)
 {
@@ -51,22 +56,29 @@ void	vga_putentry_at(char c, uint8_t color, size_t x, size_t y)
 
 void	vga_putchar(char c)
 {
-	if (c == '\n')
+	int				line;
+	unsigned char	uc = c;
+
+	if (uc == '\n')
 	{
-		vga_row++;
 		vga_col = 0;
+		vga_row++;
 	}
 	else
 	{
-		vga_putentry_at(c, vga_color, vga_col, vga_row);
-		if (++vga_col == VGA_WIDTH)
-		{
+		vga_putentry_at(uc, vga_color, vga_col, vga_row);
+		if (++vga_col == VGA_WIDTH) {
 			vga_col = 0;
 			if (++vga_row == VGA_HEIGHT)
-				vga_row = 0;
+			{
+				for(line = 1; line <= VGA_HEIGHT - 1; line++)
+					vga_scroll(line);
+				vga_delete_last_line();
+				vga_row = VGA_HEIGHT - 1;
+			}
 		}
 	}
-	vga_move_cursor(vga_col, vga_row);
+	vga_update_cursor();
 }
 
 void	vga_write(const char *data, size_t size)
@@ -98,4 +110,24 @@ void vga_move_cursor(int x, int y)
 	outb(0x3D5, (uint8_t) (pos & 0xFF));
 	outb(0x3D4, 0x0E);
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
+}
+
+void vga_scroll(int line)
+{
+	int loop;
+	char c;
+/* 
+	for(loop = line * (VGA_WIDTH * 2) + 0xB8000; loop < VGA_WIDTH * 2; loop++) {
+		c = *loop;
+		*(loop - (VGA_WIDTH * 2)) = c;
+	}
+	*/
+}
+
+void vga_delete_last_line(void) 
+{
+	for (size_t x = 0; x < VGA_WIDTH; x++)
+		vga_putentry_at('\0', vga_color, x, vga_row);
+	vga_col = 0;
+	vga_update_cursor();
 }
