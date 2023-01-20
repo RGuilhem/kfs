@@ -26,7 +26,11 @@ AS_OBJ         = $(addprefix $(AS_DIR), $(PRE_AS))
 INCLUDE_DIR    = include/
 
 
-STR_PRE_SRC        = strlen.c
+STR_PRE_SRC        = strlen.c \
+					 memcmp.c \
+					 memset.c \
+					 memmove.c \
+					 memcpy.c
 STR_SRC_DIR        = $(SRC_DIR)/string/
 STR_SRC            = $(addprefix $(STR_SRC_DIR), $(STR_PRE_SRC))
 STR_PRE_OBJ        = $(STR_PRE_SRC:.c=.o)
@@ -62,6 +66,7 @@ run: $(IMAGE)
 	 $(VM) -cdrom $(IMAGE)
 
 clean:
+	$(RM) $(STR_OBJ)
 	$(RM) $(OBJ)
 	$(RM) $(AS_OBJ)
 
