@@ -31,11 +31,23 @@ STR_PRE_SRC        = strlen.c \
 					 memset.c \
 					 memmove.c \
 					 memcpy.c
-STR_SRC_DIR        = $(SRC_DIR)/string/
+STR_SRC_DIR        = $(SRC_DIR)string/
 STR_SRC            = $(addprefix $(STR_SRC_DIR), $(STR_PRE_SRC))
 STR_PRE_OBJ        = $(STR_PRE_SRC:.c=.o)
 STR_OBJ_DIR        = $(STR_SRC_DIR)
 STR_OBJ            = $(addprefix $(STR_OBJ_DIR), $(STR_PRE_OBJ))
+
+
+STDIO_PRE_SRC        = putchar.c \
+					   puts.c \
+					   printf.c
+STDIO_SRC_DIR        = $(SRC_DIR)stdio/
+STDIO_SRC            = $(addprefix $(STDIO_SRC_DIR), $(STDIO_PRE_SRC))
+STDIO_PRE_OBJ        = $(STDIO_PRE_SRC:.c=.o)
+STDIO_OBJ_DIR        = $(STDIO_SRC_DIR)
+STDIO_OBJ            = $(addprefix $(STDIO_OBJ_DIR), $(STDIO_PRE_OBJ))
+
+LIB_OBJ            = $(STR_OBJ) $(STDIO_OBJ)
 
 LD             = linker.ld
 LD_FLAGS       = -nostdlib \
@@ -47,8 +59,8 @@ IMAGE          = kfs.iso
 
 all: $(IMAGE)
 	
-$(NAME): $(AS_OBJ) $(STR_OBJ) $(OBJ)
-	$(CC) -T $(LD) -o $@ $(LD_FLAGS) $(AS_OBJ) $(OBJ) $(STR_OBJ) -lgcc
+$(NAME): $(AS_OBJ) $(LIB_OBJ) $(OBJ)
+	$(CC) -T $(LD) -o $@ $(LD_FLAGS) $(AS_OBJ) $(OBJ) $(LIB_OBJ) -lgcc
 
 $(IMAGE): $(NAME)
 	mkdir -p isodir/boot/grub
@@ -66,7 +78,7 @@ run: $(IMAGE)
 	 $(VM) -cdrom $(IMAGE)
 
 clean:
-	$(RM) $(STR_OBJ)
+	$(RM) $(LIB_OBJ)
 	$(RM) $(OBJ)
 	$(RM) $(AS_OBJ)
 
