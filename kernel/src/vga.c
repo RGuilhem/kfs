@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:46:57 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 14:21:16 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/20 14:25:25 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,16 @@ void	vga_write(const char *data, size_t size)
 void	vga_putstr(const char *data)
 {
 	vga_write(data, strlen(data));
+}
+
+uint16_t vga_get_cursor_pos(void)
+{
+    uint16_t pos = 0;
+    outb(0x3D4, 0x0F);
+    pos |= inb(0x3D5);
+    outb(0x3D4, 0x0E);
+    pos |= ((uint16_t)inb(0x3D5)) << 8;
+    return pos;
 }
 
 void vga_move_cursor(int x, int y)
