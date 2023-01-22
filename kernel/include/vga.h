@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 22:40:24 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 15:15:26 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/22 14:34:43 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ static inline uint16_t	vga_entry(unsigned char uc, uint8_t color)
 }
 
 void		vga_initialize(void);
+void		vga_clear(void);
 void		vga_setcolor(uint8_t color);
 void		vga_putentry_at(char c, uint8_t color, size_t x, size_t y);
 void		vga_putchar(char c);
@@ -54,7 +55,7 @@ void		vga_write(const char *data, size_t size);
 void		vga_putstr(const char *data);
 void		vga_move_cursor(int	x, int y);
 uint16_t	vga_get_cursor_pos(void);
-void		vga_scroll(int line);
+void		vga_scroll(size_t line);
 void		vga_delete_last_line(void);
 
 #endif

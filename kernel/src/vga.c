@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:46:57 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 15:43:14 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/22 14:56:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	vga_initialize(void)
 	}
 }
 
+void	vga_clear(void)
+{
+	vga_initialize();
+}
+
 void	vga_setcolor(uint8_t color)
 {
 	vga_color = color;
@@ -56,7 +61,7 @@ void	vga_putentry_at(char c, uint8_t color, size_t x, size_t y)
 
 void	vga_putchar(char c)
 {
-	int				line;
+	size_t			line;
 	unsigned char	uc = c;
 
 	if (uc == '\n')
@@ -69,14 +74,15 @@ void	vga_putchar(char c)
 		vga_putentry_at(uc, vga_color, vga_col, vga_row);
 		if (++vga_col == VGA_WIDTH) {
 			vga_col = 0;
-			if (++vga_row == VGA_HEIGHT)
-			{
-				for(line = 1; line <= VGA_HEIGHT - 1; line++)
-					vga_scroll(line);
-				vga_delete_last_line();
-				vga_row = VGA_HEIGHT - 1;
-			}
+			vga_row++;
 		}
+	}
+	if (vga_row == VGA_HEIGHT)
+	{
+		for(line = 1; line <= VGA_HEIGHT - 1; line++)
+			vga_scroll(line);
+		vga_delete_last_line();
+		vga_row = VGA_HEIGHT - 1;
 	}
 	vga_update_cursor();
 }
@@ -112,22 +118,19 @@ void vga_move_cursor(int x, int y)
 	outb(0x3D5, (uint8_t) ((pos >> 8) & 0xFF));
 }
 
-void vga_scroll(int line)
+void vga_scroll(size_t line)
 {
-	int loop;
-	char c;
-/* 
-	for(loop = line * (VGA_WIDTH * 2) + 0xB8000; loop < VGA_WIDTH * 2; loop++) {
-		c = *loop;
-		*(loop - (VGA_WIDTH * 2)) = c;
-	}
-	*/
+	const size_t index_line_before = ((int) line - 1) * VGA_WIDTH;
+	const size_t index_line = line * VGA_WIDTH;
+
+	for (size_t x = 0; x < VGA_WIDTH; x++)
+		vga_buffer[index_line_before + x] = vga_buffer[index_line + x];
 }
 
 void vga_delete_last_line(void) 
 {
 	for (size_t x = 0; x < VGA_WIDTH; x++)
-		vga_putentry_at('\0', vga_color, x, vga_row);
+		vga_putentry_at('\0', vga_color, x, VGA_HEIGHT - 1);
 	vga_col = 0;
 	vga_update_cursor();
 }
