@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:51:48 by graux             #+#    #+#             */
-/*   Updated: 2023/01/22 17:57:40 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/22 21:24:35 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	init_gdt(void)
 	kgdtr.limit = GDT_SIZE * 8;
 	kgdtr.base  = GDT_BASE;
 	memcpy((char *) kgdtr.base, (char *) kgdt, kgdtr.limit);
-	asm("lgdtl (kgdtr)");
+	asm("lgdt (kgdtr)");
 	asm("movw $0x10, %ax   \n\
 		 movw %ax, %ds     \n\
 		 movw %ax, %es     \n\

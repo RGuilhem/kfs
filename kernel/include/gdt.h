@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:58:31 by graux             #+#    #+#             */
-/*   Updated: 2023/01/22 17:36:58 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/22 21:21:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # include <stdint.h>
 
 # define GDT_BASE 0x00000800
-# define GDT_SIZE 0xFF       /* Possible number of entry in the gdt */
+# define GDT_SIZE 0x0F       /* Possible number of entry in the gdt */
 
 struct gdtr
 {
