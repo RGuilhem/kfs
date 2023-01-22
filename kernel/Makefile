@@ -13,6 +13,7 @@ CFLAGS = -Wall \
 		 -std=gnu99
 
 PRE_SRC        = kernel.c \
+				 gdt.c    \
 				 vga.c
 SRC_DIR        = src/
 SRC            = $(addprefix $(SRC_DIR), $(PRE_SRC))

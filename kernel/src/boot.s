@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/19 22:40:52 by graux            ###   ########.fr        #
+#    Updated: 2023/01/22 17:50:52 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ _start:
 		C++ features such as global constructors and exceptions will require
 		runtime support to work as well.
 	*/
+	call init_gdt
  
 	/*
 	Enter the high-level kernel. The ABI requires the stack is 16-byte
