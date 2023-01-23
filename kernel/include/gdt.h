@@ -6,10 +6,12 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:58:31 by graux             #+#    #+#             */
-/*   Updated: 2023/01/22 21:21:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 11:00:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef GDT_H
+# define GDT_H
 
 # include <stdint.h>
 
@@ -36,3 +38,5 @@ struct gdt_descriptor
 void	init_gdt_descriptor(uint32_t base, uint32_t limit, uint8_t access,
 							uint8_t other, struct gdt_descriptor *descriptor);
 void	init_gdt(void);
+
+#endif
