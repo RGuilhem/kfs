@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string.h                                           :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 23:28:13 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:41:20 by graux            ###   ########.fr       */
+/*   Created: 2022/10/07 16:09:46 by graux             #+#    #+#             */
+/*   Updated: 2023/01/23 13:57:05 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "kernel.h"
 
-#ifndef STRING_H
-# define STRING_H
+static void	ft_putnbr_fd_rec(long n)
+{
+	if (n < 0)
+	{
+		vga_putchar('-');
+		ft_putnbr_fd_rec(-n);
+	}
+	else if (n >= 10)
+	{
+		ft_putnbr_fd_rec(n / 10);
+		ft_putnbr_fd_rec(n % 10);
+	}
+	else
+		vga_putchar(n + '0');
+}
 
-# include <stddef.h>
-
-char	*strchr(const char *s, int c);
-size_t	strlen(const char *str);
-int		memcmp(const void* aptr, const void* bptr, size_t size);
-void*	memset(void* bufptr, int value, size_t size);
-void*	memmove(void* dstptr, const void* srcptr, size_t size);
-void*	memcpy(void* restrict dstptr, const void* restrict srcptr, size_t size);
-
-#endif
+void	ft_putnbr(int n)
+{
+	ft_putnbr_fd_rec(n);
+}

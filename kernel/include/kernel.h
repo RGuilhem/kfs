@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 23:56:14 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 14:00:41 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 14:09:54 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 # include <stdint.h>
 # include <stdbool.h>
 # include "stdio.h"
+# include "string.h"
 
 #endif

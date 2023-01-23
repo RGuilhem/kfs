@@ -41,7 +41,17 @@ STR_OBJ            = $(addprefix $(STR_OBJ_DIR), $(STR_PRE_OBJ))
 
 STDIO_PRE_SRC        = putchar.c \
 					   puts.c \
-					   printf.c
+					   printf.c \
+					   ft_display_char.c \
+					   ft_display_decimal.c \
+					   ft_display_hex.c \
+					   ft_display_pointer.c \
+					   ft_display_str.c \
+					   ft_display_unsigned.c \
+					   ft_format.c \
+					   ft_handle_specifier.c \
+					   ft_printf.c \
+					   ft_putnbr.c
 STDIO_SRC_DIR        = $(SRC_DIR)stdio/
 STDIO_SRC            = $(addprefix $(STDIO_SRC_DIR), $(STDIO_PRE_SRC))
 STDIO_PRE_OBJ        = $(STDIO_PRE_SRC:.c=.o)
