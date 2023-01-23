@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:58:31 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 11:00:32 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 13:09:56 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,20 @@
 
 # define GDT_BASE 0x00000800
 # define GDT_SIZE 0x0F       /* Possible number of entry in the gdt */
+
+# define KGDT_BASE			0x0
+# define KGDT_LIMIT 		0xFFFFF
+# define KGDT_CODE_ACCESS	0x9B
+# define KGDT_DATA_ACCESS	0x93
+# define KGDT_STACK_ACCESS	0x97
+
+# define UGDT_BASE			0x0
+# define UGDT_LIMIT			0xFFFFF
+# define UGDT_CODE_ACCESS	0xFF
+# define UGDT_DATA_ACCESS	0xF3
+# define UGDT_STACK_ACCESS	0xF7
+
+# define GDT_OTHER			0x0D
 
 struct gdtr
 {

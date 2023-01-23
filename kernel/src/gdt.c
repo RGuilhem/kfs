@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 16:51:48 by graux             #+#    #+#             */
-/*   Updated: 2023/01/22 21:24:35 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 13:14:36 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	init_gdt(void)
 
 	init_gdt_descriptor(0x0, 0x0, 0x0, 0x0, &kgdt[0]);
 	//Kernel code, data and stack
-	init_gdt_descriptor(0x0, 0xFFFFF, 0x9B, 0x0D, &kgdt[1]);
-	init_gdt_descriptor(0x0, 0xFFFFF, 0x93, 0x0D, &kgdt[2]);
-	init_gdt_descriptor(0x0, 0x0, 0x97, 0x0D, &kgdt[3]);
+	init_gdt_descriptor(KGDT_BASE, KGDT_LIMIT, KGDT_CODE_ACCESS, GDT_OTHER, &kgdt[1]);
+	init_gdt_descriptor(KGDT_BASE, KGDT_LIMIT, KGDT_DATA_ACCESS, GDT_OTHER, &kgdt[2]);
+	init_gdt_descriptor(KGDT_BASE, 0x0, KGDT_STACK_ACCESS, GDT_OTHER, &kgdt[3]);
 	//User code, data and stack
-	init_gdt_descriptor(0x0, 0xFFFFF, 0xFF, 0x0D, &kgdt[4]);
-	init_gdt_descriptor(0x0, 0xFFFFF, 0xF3, 0x0D, &kgdt[5]);
-	init_gdt_descriptor(0x0, 0x0, 0xF7, 0x0D, &kgdt[6]);
+	init_gdt_descriptor(UGDT_BASE, UGDT_LIMIT, UGDT_CODE_ACCESS, GDT_OTHER, &kgdt[4]);
+	init_gdt_descriptor(UGDT_BASE, UGDT_LIMIT, UGDT_DATA_ACCESS, GDT_OTHER, &kgdt[5]);
+	init_gdt_descriptor(UGDT_BASE, 0x0, UGDT_STACK_ACCESS, GDT_OTHER, &kgdt[6]);
 	//TODO: create tss gdt entry;
 	
 	kgdtr.limit = GDT_SIZE * 8;
