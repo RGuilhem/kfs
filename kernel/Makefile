@@ -41,7 +41,6 @@ STR_OBJ            = $(addprefix $(STR_OBJ_DIR), $(STR_PRE_OBJ))
 
 STDIO_PRE_SRC        = putchar.c \
 					   puts.c \
-					   printf.c \
 					   ft_display_char.c \
 					   ft_display_decimal.c \
 					   ft_display_hex.c \

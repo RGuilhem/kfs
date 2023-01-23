@@ -6,11 +6,11 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:02:37 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 15:03:12 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 20:51:31 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
+#include "kernel.h"
 
 int puts(const char *str) {
 	return (printf("%s\n", str));

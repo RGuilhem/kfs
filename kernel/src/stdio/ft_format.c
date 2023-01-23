@@ -6,7 +6,7 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:46:04 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:45:42 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 20:43:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_format.h"
@@ -51,4 +51,5 @@ void	ft_handle_flags(int *pos, t_md *md, const char *format)
 			md->zero_pad = 1;
 		(*pos)++;
 	}
+	ft_handle_specifier(pos, md, format);
 }

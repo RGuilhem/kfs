@@ -6,13 +6,13 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 11:18:53 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:52:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 20:52:00 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "kernel.h"
 #include "ft_format.h"
 
-int	ft_printf(const char *format, ...)
+int	printf(const char *format, ...)
 {
 	t_md	md;
 	int		printed_chars;
