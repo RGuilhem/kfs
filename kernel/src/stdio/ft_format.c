@@ -6,12 +6,12 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:46:04 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 13:43:25 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/23 14:45:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf.h"
 #include "ft_format.h"
 #include "ft_specifier.h"
+#include "string.h"
 
 t_md	*ft_reset_format(t_md *md)
 {
