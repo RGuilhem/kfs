@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:16:36 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 12:57:31 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:59:34 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 enum error_code
 {
 	ERR_DEFAULT	= 0,
-	ERRP_PERM	= 1,
+	ERR_PERM	= 1,
 	ERR_INVA	= 22,
 	ERR_NOSYS	= 78,
 };
