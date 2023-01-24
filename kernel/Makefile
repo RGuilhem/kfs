@@ -14,7 +14,8 @@ CFLAGS = -Wall \
 
 PRE_SRC        = kernel.c \
 				 gdt.c    \
-				 vga.c
+				 vga.c    \
+				 error.c
 SRC_DIR        = src/
 SRC            = $(addprefix $(SRC_DIR), $(PRE_SRC))
 PRE_OBJ        = $(PRE_SRC:.c=.o)
