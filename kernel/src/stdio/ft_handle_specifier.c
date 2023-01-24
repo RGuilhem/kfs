@@ -6,13 +6,11 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 10:35:30 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:46:27 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 11:04:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_specifier.h"
-#include "kernel.h"
-
+#include "stdio.h"
 
 // specifiers: : cspdiuxX%
 void	ft_handle_specifier(int *pos, t_md *md, const char *format)
