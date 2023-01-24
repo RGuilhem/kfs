@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:46:57 by graux             #+#    #+#             */
-/*   Updated: 2023/01/22 14:56:07 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 12:52:04 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ size_t		vga_row;
 size_t		vga_col;
 uint8_t		vga_color;
 uint16_t	*vga_buffer;
+static uint8_t		vga_default_color;
 
 static void	vga_update_cursor()
 {
@@ -31,7 +32,8 @@ void	vga_initialize(void)
 {
 	vga_row = 0;
 	vga_col = 0;
-	vga_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	vga_default_color = vga_entry_color(VGA_COLOR_LIGHT_GREY, VGA_COLOR_BLACK);
+	vga_color = vga_default_color;
 	vga_buffer = (uint16_t *) 0xB8000;
 	for (size_t y = 0; y < VGA_HEIGHT; y++)
 	{
@@ -51,6 +53,11 @@ void	vga_clear(void)
 void	vga_setcolor(uint8_t color)
 {
 	vga_color = color;
+}
+
+void	vga_reset_color(void)
+{
+	vga_color = vga_default_color;
 }
 
 void	vga_putentry_at(char c, uint8_t color, size_t x, size_t y)
