@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/22 17:50:52 by graux            ###   ########.fr        #
+#    Updated: 2023/01/24 15:48:52 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,10 @@
 */
 .section .bss
 .align 16
+.global stack_bottom
 stack_bottom:
 .skip 16384 # 16 KiB
+.global stack_top
 stack_top:
  
 /*

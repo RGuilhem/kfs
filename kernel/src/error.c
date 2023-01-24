@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 11:54:05 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 12:58:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 14:50:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		get_errno(void)
 void	print_err(const char *error_msg, enum error_code err_type)
 {
 	vga_setcolor(vga_entry_color(VGA_COLOR_RED, VGA_COLOR_BLACK));
-	printf("ERROR: %d, %s\n", err_type, error_msg);
+	printf("\nERROR: %d, %s\n", err_type, error_msg);
 	vga_reset_color();
 }
