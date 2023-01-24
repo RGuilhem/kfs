@@ -6,11 +6,11 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:31:54 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:14:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:19:13 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_format.h"
+#include "stdio.h"
 #include "kernel.h"
 
 static void	ft_plus(int *i, t_md *md)

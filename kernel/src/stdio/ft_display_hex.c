@@ -6,11 +6,11 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:29:25 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:04:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:19:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_format.h"
+#include "stdio.h"
 #include "kernel.h"
 
 static int	ft_hex_len(unsigned int num)

@@ -6,10 +6,11 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:12:43 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 13:52:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:19:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_format.h"
+
+#include "stdio.h"
 #include "kernel.h"
 
 void	ft_display_char(t_md *md)

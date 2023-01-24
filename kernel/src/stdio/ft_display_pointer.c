@@ -6,11 +6,11 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:30:06 by graux             #+#    #+#             */
-/*   Updated: 2023/01/23 14:06:30 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:19:32 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_format.h"
+#include "stdio.h"
 #include "kernel.h"
 
 static int	ft_ptr_len(unsigned long long num)
