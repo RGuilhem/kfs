@@ -6,11 +6,12 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 10:35:30 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 11:04:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 13:23:45 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdio.h"
+#include "kfs/error.h"
 
 // specifiers: : cspdiuxX%
 void	ft_handle_specifier(int *pos, t_md *md, const char *format)
@@ -32,5 +33,7 @@ void	ft_handle_specifier(int *pos, t_md *md, const char *format)
 		vga_putchar('%');
 		md->total_len += 1;
 	}
+	else
+		print_err("Unknown specifier", ERR_INVA);
 	(*pos)++;
 }
