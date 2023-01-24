@@ -2,40 +2,42 @@
 42 kernel from scratch
 
 # Roadmap
+## Current TODO list
+- Write basic kernel types
 
 ## kfs-1
 ### Mandatory part
-- [ ] Install GRUB on an virtual image
-- [ ] Write an ASM boot code that handles multiboot header, and use GRUB to init and
+- [X] Install GRUB on an virtual image
+- [X] Write an ASM boot code that handles multiboot header, and use GRUB to init and
 call main function of the kernel itself.
-- [ ] Write basic kernel code of the choosen language.
-- [ ] Compile it with correct flags, and link it to make it bootable.
+- [X] Write basic kernel code of the choosen language.
+- [X] Compile it with correct flags, and link it to make it bootable.
 - [ ] Once all of those steps above are done, you can write some helpers like kernel types
 or basic functions (strlen, strcmp, ...)
 - [ ] Your work must not exceed 10 MB.
-- [ ] Code the interface between your kernel and the screen.
-- [ ] Display "42" on the screen.
+- [X] Code the interface between your kernel and the screen.
+- [X] Display "42" on the screen.
 
 ### Bonus Part
-- [ ] Add scroll and cursor support to your I/O interface.
-- [ ] Add colors support to your I/O interface.
-- [ ] Add helpers like printf / printk in order to print information / debug easily.
+- [X] Add scroll and cursor support to your I/O interface.
+- [X] Add colors support to your I/O interface.
+- [X] Add helpers like printf / printk in order to print information / debug easily.
 - [ ] Handle keyboard entries and print them.
 - [ ] Handle different screens, and keyboard shortcuts to switch easily between then.
 
 ## kfs-2
 ### Mandatory part
-- [ ] You must create a Global Descriptor Table.
-- [ ] Your GDT must contain:
-◦ Kernel Code
-◦ Kernel Data
-◦ Kernel stack
-◦ User code
-◦ User data
-◦ User stack
-◦ Your work should not exceed 10 MB.
+- [X] You must create a Global Descriptor Table.
+- [X] Your GDT must contain:
+	- Kernel Code
+	- Kernel Data
+	- Kernel stack
+	- User code
+	- User data
+	- User stack
+	- Your work should not exceed 10 MB.
 - [ ] You must declare your GDT to the BIOS.
-- [ ] The GDT must be set at address 0x00000800.
+- [X] The GDT must be set at address 0x00000800.
 - [ ] When this is done, you have to code a tool to print the kernel stack, in a human-friendly
 way. (Tip: If you haven’t made a printk yet, now is a good time !)
 ### Bonus Part
@@ -90,25 +92,25 @@ return them when \n is pressed).
 You will need to implement a complete interface for processes in your kernel.
 Let’s list that, point by point:
 - [ ] A full structure containing data about processes. That includes:
-◦ A PID.
-◦ Status (Run, zombie, thread)
-◦ Pointers to father and children
-◦ Stack and heap of a process. (More information below)
-◦ Currents signals (Queue list)
-◦ Owner id (User)
+	- A PID.
+	- Status (Run, zombie, thread)
+	- Pointers to father and children
+	- Stack and heap of a process. (More information below)
+	- Currents signals (Queue list)
+	- Owner id (User)
 - [ ] With that structure filled and dusted, you will need to implement the followings
 functions:
-◦ Function to queue a signal to a processus, delivered on the next CPU tick
-◦ Sockets communication helpers between processes
-◦ Functions to work on the memory of a process.
-◦ Function to copy an entire process (fork)
+	- Function to queue a signal to a processus, delivered on the next CPU tick
+	- Sockets communication helpers between processes
+	- Functions to work on the memory of a process.
+	- Function to copy an entire process (fork)
 - [ ] On top of that, you will need to code the followings helpers, in order to prepare the
 syscalls:
-◦ wait
-◦ exit
-◦ getuid
-◦ signal
-◦ kill
+	- wait
+	- exit
+	- getuid
+	- signal
+	- kill
 - [ ] All of the functions above meant to work like any UNIX system.
 ### Bonus Part
 Implement the following:
@@ -121,20 +123,20 @@ Implement the following:
 For this subject, you will have to implement a complete and functional filesystem interface. Let’s see that, point by point:
 - [ ] Write a complete interface to read / write an IDE.
 - [ ] Write a complete interface to read an ext2 filesystem:
-◦ Read the ext2 headers.
-◦ Create and fill in an ext2 kernel-side structure with groups, super blocks,
+	- Read the ext2 headers.
+	- Create and fill in an ext2 kernel-side structure with groups, super blocks,
 blocks and inodes.
 - [ ] Write a complete structure for a filesystem. That includes:
-◦ Name
-◦ Size
-◦ Type
-◦ Inode
-◦ Links
-◦ Master
-◦ Father
-◦ Children
-◦ Rights
-◦ Next of kin
+	- Name
+	- Size
+	- Type
+	- Inode
+	- Links
+	- Master
+	- Father
+	- Children
+	- Rights
+	- Next of kin
 - [ ] You will have to implement a cat command in your console, with the behavior of the
 original cat. Now that you have a root directory, you need to code a directory change
 too (pwd / cd) in your console. Keep in mind that a process needs to have its own pwd,
@@ -147,11 +149,11 @@ You can, also, implement users (with passwords, logins, etc.).
 ### Mandatory part
 In this subject you will have to:
 - [ ] Implement a functional and complete syscall interface:
-◦ A syscall table.
-◦ An ASM function for the IDT callback.
-◦ A kernel-side function that takes the number of the syscall, gets the arguments
+	- A syscall table.
+	- An ASM function for the IDT callback.
+	- A kernel-side function that takes the number of the syscall, gets the arguments
 of the call, places them in the register and pushes the call on the stack.
-◦ You must proove that your code works by creating a process, have it use a
+	- You must proove that your code works by creating a process, have it use a
 syscall, and print the used syscall on the screen.
 - [ ] Implement a working unix environment. (cf. Intro)
 - [ ] Users accounts, with password protection by obscurity. (cf. Intro)
@@ -204,21 +206,21 @@ You must install the following:
 - [ ] A POSIX shell. sh will do.
 - [ ] The complete libc.
 - [ ] Basic Unix binaries:
-◦ cat
-◦ chmod
-◦ cp
-◦ date
-◦ dd
-◦ df
-◦ echo
-◦ hostname
-◦ kill
-◦ ln
-◦ ls
-◦ mkdir
-◦ mv
-◦ ps
-◦ pwd
-◦ rm
-◦ rmdir
-◦ sleep
+	- cat
+	- chmod
+	- cp
+	- date
+	- dd
+	- df
+	- echo
+	- hostname
+	- kill
+	- ln
+	- ls
+	- mkdir
+	- mv
+	- ps
+	- pwd
+	- rm
+	- rmdir
+	- sleep
