@@ -3,7 +3,6 @@
 
 # Roadmap
 ## Current TODO list
-- Write basic kernel types
 
 ## kfs-1
 ### Mandatory part
