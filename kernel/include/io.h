@@ -6,12 +6,14 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 14:17:29 by graux             #+#    #+#             */
-/*   Updated: 2023/01/20 14:18:53 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/24 10:54:52 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IO_H
 # define IO_H
+
+# include "kfs/types.h"
 
 static inline void outb(uint16_t port, uint8_t val)
 {
