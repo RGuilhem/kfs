@@ -3,8 +3,7 @@
 
 # Roadmap
 ## Current TODO list
-- Create tools to print kernel stack
-- Error handling framework
+- Create tools to print kernel stack (see in kernelmain how to retrive the stack address)
 
 ## kfs-1
 ### Mandatory part
