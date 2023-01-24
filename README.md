@@ -3,7 +3,8 @@
 
 # Roadmap
 ## Current TODO list
-- create tools to print kernel stack
+- Create tools to print kernel stack
+- Error handling framework
 
 ## kfs-1
 ### Mandatory part
