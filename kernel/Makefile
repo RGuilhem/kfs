@@ -87,7 +87,7 @@ $(IMAGE): $(NAME)
 	$(CC) -c $< -o $@ $(CFLAGS) -I$(INCLUDE_DIR)
 
 run: $(IMAGE)
-	 $(VM) -cdrom $(IMAGE)
+	 $(VM) -monitor stdio -cdrom $(IMAGE)
 
 clean:
 	$(RM) $(LIB_OBJ)
