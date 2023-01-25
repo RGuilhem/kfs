@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/25 14:49:33 by graux            ###   ########.fr        #
+#    Updated: 2023/01/25 16:15:54 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,8 +73,6 @@ _start:
 	mov $stack_top, %esp
 	
 	#Memory management setup
-	push eax
-	push ebx
 	call detect_memory
  
 	/*

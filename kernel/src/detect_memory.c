@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:50:08 by graux             #+#    #+#             */
-/*   Updated: 2023/01/25 15:17:01 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/25 16:23:22 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,18 @@
 
 void detect_memory(multiboot_info_t* mbd, uint32_t magic)
 {
+	vga_initialize();
+	printf("MEMORY DETECTION\n");
     /* Make sure the magic number matches for memory mapping*/
     if(magic != MULTIBOOT_BOOTLOADER_MAGIC) {
-        //panic("invalid magic number!");
+		//TODO panic
+        printf("invalid magic number!");
     }
 
     /* Check bit 6 to see if we have a valid memory map */
     if(!(mbd->flags >> 6 & 0x1)) {
-        //panic("invalid memory map given by GRUB bootloader");
+		//TODO panic
+        printf("invalid memory map given by GRUB bootloader");
     }
 
     /* Loop through the memory map and display the values */
