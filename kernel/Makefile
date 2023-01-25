@@ -3,6 +3,7 @@ RM     = rm -rf
 AS    = i386-elf-as
 CC    = i386-elf-gcc
 VM    = qemu-system-i386
+QEMU_FLAGS = -monitor stdio -d guest_errors
 #-fno-rtti -nostdlib
 CFLAGS = -Wall \
 		 -Wextra \
@@ -87,7 +88,7 @@ $(IMAGE): $(NAME)
 	$(CC) -c $< -o $@ $(CFLAGS) -I$(INCLUDE_DIR)
 
 run: $(IMAGE)
-	 $(VM) -monitor stdio -cdrom $(IMAGE)
+	 $(VM) $(QEMU_FLAGS) -cdrom $(IMAGE)
 
 clean:
 	$(RM) $(LIB_OBJ)
