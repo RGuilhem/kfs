@@ -22,8 +22,7 @@ SRC            = $(addprefix $(SRC_DIR), $(PRE_SRC))
 PRE_OBJ        = $(PRE_SRC:.c=.o)
 OBJ_DIR        = $(SRC_DIR)
 OBJ            = $(addprefix $(OBJ_DIR), $(PRE_OBJ))
-AS_FILES       = boot.s \
-				 cr_utils.s
+AS_FILES       = boot.s
 AS_DIR         = $(SRC_DIR)
 PRE_AS         = $(AS_FILES:.s=.o)
 AS_OBJ         = $(addprefix $(AS_DIR), $(PRE_AS))
