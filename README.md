@@ -3,7 +3,7 @@
 
 # Roadmap
 ## Current TODO list
-- Create tools to print kernel stack (see in kernelmain how to retrive the stack address)
+- enable paging
 
 ## kfs-1
 ### Mandatory part
