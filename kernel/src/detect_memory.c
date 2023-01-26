@@ -6,13 +6,14 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:50:08 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 11:34:45 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 14:22:40 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "multiboot.h"
 #include <stdint.h>
 #include "stdio.h"
+#include "kfs/phys_mem.h"
 
 void detect_memory(multiboot_info_t* mbd, uint32_t magic)
 {
@@ -40,17 +41,10 @@ void detect_memory(multiboot_info_t* mbd, uint32_t magic)
     {
         multiboot_memory_map_t* mmmt = 
 			(multiboot_memory_map_t*) (mbd->mmap_addr + i);
-        printf("Base Addr: %0X | Length: %0X | Type: %d\n",
+        printf("Base Addr: %0x | Length: %0x | Type: %d\n",
             mmmt->addr_low, mmmt->len_low, mmmt->type);
 
-        if(mmmt->type == MULTIBOOT_MEMORY_AVAILABLE) {
-            /* 
-             * Do something with this memory block!
-             * BE WARNED that some of memory shown as availiable is actually 
-             * actively being used by the kernel! You'll need to take that
-             * into account before writing to memory!
-             */
-			//TODO init phys memory map
-        }
+		add_phys_map_zone(mmmt->addr_low, mmmt->len_low, mmmt->type);
     }
+	mark_reserved_zones(mbd->mem_lower + mbd->mem_upper);
 }

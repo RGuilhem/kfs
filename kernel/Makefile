@@ -17,7 +17,8 @@ PRE_SRC        = kernel.c \
 				 gdt.c    \
 				 vga.c    \
 				 error.c  \
-				 detect_memory.c
+				 detect_memory.c \
+				 phys_mem.c
 SRC_DIR        = src/
 SRC            = $(addprefix $(SRC_DIR), $(PRE_SRC))
 PRE_OBJ        = $(PRE_SRC:.c=.o)
