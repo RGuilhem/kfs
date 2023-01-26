@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 11:46:57 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 12:52:04 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:12:42 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ static uint8_t		vga_default_color;
 static void	vga_update_cursor()
 {
 	vga_move_cursor(vga_col, vga_row);
+}
+
+static void	write_com1(char c)
+{
+	outb(0x3F8, c);
 }
 
 void	vga_initialize(void)
@@ -71,6 +76,7 @@ void	vga_putchar(char c)
 	size_t			line;
 	unsigned char	uc = c;
 
+	write_com1(c);
 	if (uc == '\n')
 	{
 		vga_col = 0;
