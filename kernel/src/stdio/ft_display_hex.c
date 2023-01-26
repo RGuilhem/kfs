@@ -6,7 +6,7 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 11:29:25 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 13:19:39 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:34:12 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,25 @@ static void	ft_puthex_fd_rec(unsigned int n, int fd, char offset)
 	}
 }
 
+static void	pad(unsigned int num)
+{
+	int	i;
+	int	size;
+
+	i = -1;
+	size = ft_hex_len(num);
+	while (++i < 8 - size)
+		vga_putchar('0');
+}
+
 void	ft_display_hex(int pos, t_md *md, const char *format)
 {
 	unsigned int	num;
 
 	num = va_arg(md->args, unsigned int);
+	vga_putstr("0x");
+	if (md->zero_pad)
+		pad(num);
 	if (format[pos] == 'x')
 		ft_puthex_fd_rec(num, 1, 0);
 	else
