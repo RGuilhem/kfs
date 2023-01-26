@@ -19,7 +19,7 @@ PRE_SRC        = kernel.c \
 				 error.c  \
 				 detect_memory.c \
 				 phys_mem.c \
-				 memory_mapping.c
+				 paging.c
 SRC_DIR        = src/
 SRC            = $(addprefix $(SRC_DIR), $(PRE_SRC))
 PRE_OBJ        = $(PRE_SRC:.c=.o)
