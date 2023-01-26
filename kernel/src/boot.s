@@ -6,9 +6,11 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/26 23:38:29 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 00:20:09 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#include "kfs/paging.h"
 
 .set ALIGN,    1<<0
 .set MEMINFO,  1<<1
@@ -38,6 +40,7 @@ bootloader will jump to this position once the kernel has been loaded
 .global _start
 .type _start, @function
 _start:
+	cli
 	#stack setup
 	mov $stack_top, %esp
 	

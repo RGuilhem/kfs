@@ -11,8 +11,7 @@ CFLAGS = -Wall \
 		 -fno-exceptions \
 		 -nodefaultlibs \
 		 -ffreestanding \
-		 -std=gnu99
-
+		 -std=gnu99 
 PRE_SRC        = kernel.c \
 				 gdt.c    \
 				 vga.c    \

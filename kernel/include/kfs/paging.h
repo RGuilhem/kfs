@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:31:17 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 20:09:45 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/27 00:04:01 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include "kfs/phys_mem.h"
 
 //TODO Create struct for page dir and tables
+#define KERNEL_OFFSET 0xC00000000
+
+#ifdef __ASSEMBLER__
+#define V2P(a) ((a) - KERNEL_OFFSET)
+#define P2V(a) ((a) + KERNEL_OFFSET)
+#else
+#include <stdint.h>
+#define V2P(a) ((uintptr_t)(a) & ~KERNEL_OFFSET)
+#define P2V(a) ((uintptr_t)(a) | KERNEL_OFFSET))
+#endif
 
 # define PDIR_IND(vaddr) ((uintptr_t) vaddr >> 22)
 # define PTAB_IND(vaddr) ((uintptr_t) vaddr >> 12 & 0x3FF) //middle part of vaddr
