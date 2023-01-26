@@ -3,6 +3,11 @@
 
 # Roadmap
 ## Current TODO list
+- [] Test phys mem map
+- [] Tool to print phys mem map
+- [] Test phys allocator
+- [] Test phys deallocator
+Only after that, then:
 - enable paging
 
 ## kfs-1
