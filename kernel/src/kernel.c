@@ -6,12 +6,13 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:09:49 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 14:12:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:00:30 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "kernel.h"
 #include "gdt.h"
+#include "kfs/phys_mem.h"
 
 void	kernel_main(void)
 {

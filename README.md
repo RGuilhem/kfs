@@ -3,13 +3,15 @@
 
 # Roadmap
 ## Current TODO list
-- [] Test phys mem map
-- [] Tool to print phys mem map
-- [] Test phys allocator
-- [] Test phys deallocator
+- [ ] Test phys mem map
+- [ ] Tool to print phys mem map
+- [ ] Test phys allocator
+- [ ] Test phys deallocator
+
 Only after that, then:
 - enable paging
 
+- maybe add logging of printf to COM1 to catch in logfile from qemu
 ## kfs-1
 ### Mandatory part
 - [X] Install GRUB on an virtual image

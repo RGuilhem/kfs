@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:03:39 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 15:20:55 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:04:19 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ static int	check_page_use(uint32_t page)
 
 uint32_t	*alloc_phys_page(void)
 {
+	//TODO different memory zone between 16MB
 	uintptr_t page;
+
 	for (page = 0; page < phys_map_entries; page++)
 	{
 		if (check_page_use(page) == PAGE_AVAIL)
@@ -79,18 +81,21 @@ void	add_phys_map_zone(uint32_t base_addr, uint32_t length, uint32_t type)
 			set_entry(entry);
 		phys_map_entries++;
 	}
-	phys_map_size = phys_map_entries / 32 + 1;
+	phys_map_size = (phys_map_entries / 8);
 }
 
 void	mark_reserved_zones(uint32_t ram_size)
 {
 	printf("\nMarking reserved memory areas\n");
-	printf("Number of memory pages: %d == %0x\n\n", phys_map_entries,
-			phys_map_entries);
-	//here addr is an entry num in phys_map
-	for (uint32_t addr = 0; addr < ram_size; addr += PAGE_SIZE)
+	printf("Total memory pages: %0x\n", phys_map_entries);
+
+	uint32_t addr;
+	int	i = 0;	
+	for (addr = 0; addr < ram_size; addr += PAGE_SIZE)
 	{
-		if (addr < _kernel_end + phys_map_size)
-			set_entry(addr);
+		i++;
+		if (addr < (uint32_t)(uintptr_t)phys_map + phys_map_size)
+			set_entry(addr / PAGE_SIZE);
 	}
+	printf("Avail memory pages: %0x\n\n", phys_map_entries - i);
 }
