@@ -6,7 +6,7 @@
 /*   By: graux <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 13:46:04 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 11:02:47 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:57:55 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "string.h"
@@ -36,6 +36,7 @@ t_md	*ft_init_format(t_md *md)
 
 void	ft_handle_flags(int *pos, t_md *md, const char *format)
 {
+	ft_reset_format(md);
 	while (strchr("-+ #0", format[*pos]))
 	{
 		if (format[*pos] == '-')
