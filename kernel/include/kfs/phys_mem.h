@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:05:10 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 15:30:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:39:39 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 void	add_phys_map_zone(uint32_t base_addr, uint32_t length, uint32_t type);
 void	mark_reserved_zones(uint32_t ram_size);
-uint32_t *alloc_phys_page(void);
-void	dealloc_phys_page(uint32_t *addr);
+void	*alloc_phys_page(void);
+void	dealloc_phys_page(void *addr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:03:39 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 16:04:19 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 18:40:07 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	check_page_use(uint32_t page)
 		return (PAGE_AVAIL);
 }
 
-uint32_t	*alloc_phys_page(void)
+void	*alloc_phys_page(void)
 {
 	//TODO different memory zone between 16MB
 	uintptr_t page;
@@ -65,7 +65,7 @@ uint32_t	*alloc_phys_page(void)
 	return (void *)(0);
 }
 
-void	dealloc_phys_page(uint32_t *addr)
+void	dealloc_phys_page(void *addr)
 {
 	clear_entry((uintptr_t) addr / PAGE_SIZE);
 }
