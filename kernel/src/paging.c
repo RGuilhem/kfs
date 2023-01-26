@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:30:37 by graux             #+#    #+#             */
-/*   Updated: 2023/01/26 20:53:33 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 21:12:23 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,18 @@ static	uint32_t read_cr3(void)
 	return (cr3);
 }
 
-static	void	set_cr3(uint32_t value)
+static void	set_cr3(uint32_t value)
 {
 	asm("movl %0, %%cr3"
 			:
 			: "r" (value));
+}
+
+static void	identity_paging(uint32_t *first_pte, uintptr_t from, int size)
+{
+	from = from & 0xfffff000; //discard flags
+	for (; size > 0; from += PAGE_SIZE, size -= PAGE_SIZE, first_pte++)
+		*first_pte = from | PAGE_P;
 }
 
 void	init_paging(void)
@@ -34,6 +41,6 @@ void	init_paging(void)
 
 	for (uint32_t i = 0; i < PAGE_SIZE / 4; i++)
 	{
-		page_tab = alloc_phys_page();
+		
 	}
 }
