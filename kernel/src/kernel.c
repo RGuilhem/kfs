@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 12:09:49 by graux             #+#    #+#             */
-/*   Updated: 2023/01/24 16:56:37 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 10:24:59 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	kernel_main(void)
 	struct gdtr gdt;
 	asm ("sgdt %0"
 			: "=m" (gdt));
-	vga_initialize();
+	//vga_initialize();
 	printf("KERNEL FROM SCRATCH V0: by graux\n");
 	printf("stack_top:    %p\n", stack_top);
 	printf("esp: %p\n", esp);

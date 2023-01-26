@@ -6,7 +6,7 @@
 /*   By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 14:50:08 by graux             #+#    #+#             */
-/*   Updated: 2023/01/25 16:23:22 by graux            ###   ########.fr       */
+/*   Updated: 2023/01/26 11:34:45 by graux            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,30 @@ void detect_memory(multiboot_info_t* mbd, uint32_t magic)
 {
 	vga_initialize();
 	printf("MEMORY DETECTION\n");
-    /* Make sure the magic number matches for memory mapping*/
     if(magic != MULTIBOOT_BOOTLOADER_MAGIC) {
 		//TODO panic
-        printf("invalid magic number!");
+        printf("Invalid magic number!");
     }
 
     /* Check bit 6 to see if we have a valid memory map */
     if(!(mbd->flags >> 6 & 0x1)) {
 		//TODO panic
-        printf("invalid memory map given by GRUB bootloader");
+        printf("Invalid memory map given by GRUB bootloader");
     }
+	if (mbd->flags & 0x1)
+	{
+		printf("MEM below 640KB: %d KB\n", mbd->mem_lower);
+		printf("MEM above 1 MB : %d MB\n", mbd->mem_upper / 1024);
+	}
 
     /* Loop through the memory map and display the values */
-    for(int i = 0; i < mbd->mmap_length; 
+    for(size_t i = 0; i < mbd->mmap_length; 
         i += sizeof(multiboot_memory_map_t)) 
     {
         multiboot_memory_map_t* mmmt = 
 			(multiboot_memory_map_t*) (mbd->mmap_addr + i);
-
-        printf("Start Addr: %x | Length: %x | Size: %x | Type: %d\n",
-            mmmt->addr_low, mmmt->len_low, mmmt->size, mmmt->type);
+        printf("Base Addr: %0X | Length: %0X | Type: %d\n",
+            mmmt->addr_low, mmmt->len_low, mmmt->type);
 
         if(mmmt->type == MULTIBOOT_MEMORY_AVAILABLE) {
             /* 
@@ -47,6 +50,7 @@ void detect_memory(multiboot_info_t* mbd, uint32_t magic)
              * actively being used by the kernel! You'll need to take that
              * into account before writing to memory!
              */
+			//TODO init phys memory map
         }
     }
 }
