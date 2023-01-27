@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 12:14:23 by graux             #+#    #+#              #
-#    Updated: 2023/01/27 11:47:11 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 16:25:32 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ ENTRY(_start)
 OUTPUT_FORMAT(elf32-i386)
 
 KERNEL_OFFSET = 0xC0000000;
-KERNEL_PHYS = 0x0010000;
+KERNEL_PHYS = 0x00010000;
 VIRT = KERNEL_PHYS + KERNEL_OFFSET;
 
 SECTIONS

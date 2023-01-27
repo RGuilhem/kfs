@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/27 15:47:10 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 17:19:53 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ stack_bottom:
 .global stack_top
 stack_top:
  
+.section .bss
 .align 0x1000
 boot_page_tab: .skip (1024 * 4 * 1024)
 boot_page_dir: .skip (1024 * 4 * 1)
@@ -40,16 +41,18 @@ multiboot_header_addr: .skip 4
 .long FLAGS
 .long CHECKSUM
  
+.align 0x1000
 .global _start
 #.type _start
 _start:
+	cli
 	#save multibot info to be able to use eax and ebx
 	movl %eax, (multiboot_header_addr - K_VIRT_BASE)
 	movl %ebx, (multiboot_info_addr - K_VIRT_BASE)
 
 	#init pages
 	lea (boot_page_tab - K_VIRT_BASE), %eax
-	movl $0x7, %ebx
+	movl $7, %ebx
 	movl $(4 * 1024), %ecx
 	.Loop1:
 	movl %ebx, (%eax)
@@ -59,7 +62,7 @@ _start:
 
 	lea (boot_page_tab - K_VIRT_BASE), %eax
 	addl $(K_PAGE_NUM * 1024 * 4), %eax
-	movl $0x7, %ebx
+	movl $7, %ebx
 	movl $(4 * 1024), %ecx
 	.Loop2:
 	movl %ebx, (%eax)
@@ -76,8 +79,9 @@ _start:
 	addl $4, %edx
 	addl $4096, %ebx
 	loop .Loop3
+	hlt
 
-	movl $(boot_page_dir - K_VIRT_BASE), %ecx
+	lea (boot_page_dir - K_VIRT_BASE), %ecx
 	movl %ecx, %cr3 /*load page dir*/
 
 	movl %cr0, %ecx
@@ -90,7 +94,6 @@ _start:
 
 start_high_half:
 	#unmap identity mapping
-	hlt
 	movl $0x00000000, (boot_page_dir)
 
 	mov $stack_top, %esp
