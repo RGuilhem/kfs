@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/27 12:47:35 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 15:47:10 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,12 @@ stack_bottom:
 .global stack_top
 stack_top:
  
-.section .data
 .align 0x1000
-boot_page_dir:
-	.long 0x00000083 # first 4mb unmapped later
-	.rept (K_PAGE_NUM - 1)
-		.long 0 #zero pages before kernel
-	.endr
-	.long 0x00000083 # kernel first 4mb
-	.rept (1024 - K_PAGE_NUM - 1)
-		.long 0 #zero pages after kernel
-	.endr
+boot_page_tab: .skip (1024 * 4 * 1024)
+boot_page_dir: .skip (1024 * 4 * 1)
+
+multiboot_info_addr: .skip 4
+multiboot_header_addr: .skip 4
 
 .section .text
 .align 4
@@ -48,23 +43,55 @@ boot_page_dir:
 .global _start
 #.type _start
 _start:
-	movl (boot_page_dir - K_VIRT_BASE), %ecx
+	#save multibot info to be able to use eax and ebx
+	movl %eax, (multiboot_header_addr - K_VIRT_BASE)
+	movl %ebx, (multiboot_info_addr - K_VIRT_BASE)
+
+	#init pages
+	lea (boot_page_tab - K_VIRT_BASE), %eax
+	movl $0x7, %ebx
+	movl $(4 * 1024), %ecx
+	.Loop1:
+	movl %ebx, (%eax)
+	addl $4, %eax
+	addl $4096, %ebx
+	loop .Loop1
+
+	lea (boot_page_tab - K_VIRT_BASE), %eax
+	addl $(K_PAGE_NUM * 1024 * 4), %eax
+	movl $0x7, %ebx
+	movl $(4 * 1024), %ecx
+	.Loop2:
+	movl %ebx, (%eax)
+	addl $4, %eax
+	addl $(4096), %ebx
+	loop .Loop2
+
+	lea (boot_page_tab - K_VIRT_BASE), %ebx
+	lea (boot_page_dir - K_VIRT_BASE), %edx
+	orl $0x7, %ebx
+	movl $1024, %ecx
+	.Loop3:
+	movl %ebx, (%edx)
+	addl $4, %edx
+	addl $4096, %ebx
+	loop .Loop3
+
+	movl $(boot_page_dir - K_VIRT_BASE), %ecx
 	movl %ecx, %cr3 /*load page dir*/
-	
+
 	movl %cr0, %ecx
-	orl $0x80000000, %ecx # set paging
-	movl %ecx, %cr3
+	orl $0x80000000, %ecx # set paging add 1 for protected
+	movl %ecx, %cr0
 
 	#long jump to correct current vaddr in kernel
 	lea (start_high_half), %ecx
-	hlt
-	jmp (%ecx)
+	ljmp *(%ecx)
 
 start_high_half:
 	#unmap identity mapping
 	hlt
 	movl $0x00000000, (boot_page_dir)
-	invlpg (0)
 
 	mov $stack_top, %esp
 	push %eax #push header magic number
