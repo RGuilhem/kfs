@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/19 22:40:50 by graux             #+#    #+#              #
-#    Updated: 2023/01/27 00:20:09 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 01:10:28 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,6 @@ bootloader will jump to this position once the kernel has been loaded
 .type _start, @function
 _start:
 	cli
-	#stack setup
 	mov $stack_top, %esp
 	
 	#Memory management setup
