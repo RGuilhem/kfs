@@ -6,7 +6,7 @@
 #    By: graux <graux@student.42lausanne.ch>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/20 12:14:23 by graux             #+#    #+#              #
-#    Updated: 2023/01/27 00:14:45 by graux            ###   ########.fr        #
+#    Updated: 2023/01/27 11:47:11 by graux            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,31 +14,30 @@ ENTRY(_start)
 OUTPUT_FORMAT(elf32-i386)
 
 KERNEL_OFFSET = 0xC0000000;
-KERNEL_START = 0x10000;
+KERNEL_PHYS = 0x0010000;
+VIRT = KERNEL_PHYS + KERNEL_OFFSET;
 
 SECTIONS
 {
-	. = 1M;
+	. = VIRT;
 
-	. = KERNEL_START + KERNEL_OFFSET;
 	_kernel_start = .;
-	.text : AT(ADDR(.text) - KERNEL_OFFSET)
+	.text ALIGN(4K) : AT(ADDR(.text) - KERNEL_OFFSET)
 	{
-		*(.multiboot)
 		*(.text)
 	}
 
-	.rodata : AT(ADDR(.rodata) - KERNEL_OFFSET)
+	.rodata ALIGN(4K) : AT(ADDR(.rodata) - KERNEL_OFFSET)
 	{
 		*(.rodata)
 	}
 
-	.data : AT(ADDR(.data) - KERNEL_OFFSET)
+	.data ALIGN(4K) : AT(ADDR(.data) - KERNEL_OFFSET)
 	{
 		*(.data)
 	}
 
-	.bss : AT(ADDR(.bss) - KERNEL_OFFSET)
+	.bss ALIGN(4K) : AT(ADDR(.bss) - KERNEL_OFFSET)
 	{
 		*(COMMON)
 		*(.bss)
